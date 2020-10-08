@@ -1913,7 +1913,7 @@
           </emu-note>
           <emu-note>
             <p>Implementers of ECMAScript may find useful the paper and code written by David M. Gay for binary-to-decimal conversion of floating-point numbers:</p>
-            <p>Gay, David M. Correctly Rounded Binary-Decimal and Decimal-Binary Conversions. Numerical Analysis, Manuscript 90-10. AT&amp;T Bell Laboratories (Murray Hill, New Jersey). November 30, 1990. Available as
+            <p>Gay, David M. Correctly Rounded Binary-Decimal and Decimal-Binary Conversions. Numerical Analysis, Manuscript 90-10. AT&amp;T Bell Laboratories (Murray Hill, New Jersey). 30 November 1990. Available as
               <br>
               <a href="http://ampl.com/REFS/abstracts.html#rounding">http://ampl.com/REFS/abstracts.html#rounding</a>. Associated code available as
               <br>
@@ -24729,7 +24729,7 @@
   <p>Unless otherwise specified every built-in prototype object has the Object prototype object, which is the initial value of the expression `Object.prototype` (<emu-xref href="#sec-properties-of-the-object-prototype-object"></emu-xref>), as the value of its [[Prototype]] internal slot, except the Object prototype object itself.</p>
   <p>Built-in function objects that are not identified as constructors do not implement the [[Construct]] internal method unless otherwise specified in the description of a particular function.</p>
   <p>Each built-in function defined in this specification is created by calling the CreateBuiltinFunction abstract operation (<emu-xref href="#sec-createbuiltinfunction"></emu-xref>).</p>
-  <p>Every built-in function object, including constructors, has a *"length"* property whose value is an integer. Unless otherwise specified, this value is equal to the number of required parameters shown in the subclause headings for the function description. Optional parameters and rest parameters are not included in the parameter count.</p>
+  <p>Every built-in function object, including constructors, has a *"length"* property whose value is a non-negative integer. Unless otherwise specified, this value is equal to the number of required parameters shown in the subclause headings for the function description. Optional parameters and rest parameters are not included in the parameter count.</p>
   <emu-note>
     <p>For example, the function object that is the initial value of the *"map"* property of the Array prototype object is described under the subclause heading &laquo;Array.prototype.map (callbackFn [ , thisArg])&raquo; which shows the two named arguments callbackFn and thisArg, the latter being optional; therefore the value of the *"length"* property of that function object is 1.</p>
   </emu-note>
@@ -28103,11 +28103,11 @@
 
       <emu-clause id="sec-time-values-and-time-range">
         <h1>Time Values and Time Range</h1>
-        <p>Time measurement in ECMAScript is analogous to time measurement in POSIX, in particular sharing definition in terms of the proleptic Gregorian calendar, an epoch of midnight at the beginning of 01 January, 1970 UTC, and an accounting of every day as comprising exactly 86,400 seconds (each of which is 1000 milliseconds long).</p>
+        <p>Time measurement in ECMAScript is analogous to time measurement in POSIX, in particular sharing definition in terms of the proleptic Gregorian calendar, an epoch of midnight at the beginning of 1 January 1970 UTC, and an accounting of every day as comprising exactly 86,400 seconds (each of which is 1000 milliseconds long).</p>
         <p>An ECMAScript <dfn>time value</dfn> is a Number, either a finite integer representing an instant in time to millisecond precision or *NaN* representing no specific instant. A time value that is a multiple of <emu-eqn>24 &times; 60 &times; 60 &times; 1000 = 86,400,000</emu-eqn> (i.e., is equal to 86,400,000 &times; _d_ for some integer _d_) represents the instant at the start of the UTC day that follows the epoch by _d_ whole UTC days (preceding the epoch for negative _d_). Every other finite time value _t_ is defined relative to the greatest preceding time value _s_ that is such a multiple, and represents the instant that occurs within the same UTC day as _s_ but follows it by _t_ &minus; _s_ milliseconds.</p>
         <p>Time values do not account for UTC leap seconds&mdash;there are no time values representing instants within positive leap seconds, and there are time values representing instants removed from the UTC timeline by negative leap seconds. However, the definition of time values nonetheless yields piecewise alignment with UTC, with discontinuities only at leap second boundaries and zero difference outside of leap seconds.</p>
-        <p>A Number can exactly represent all integers from -9,007,199,254,740,992 to 9,007,199,254,740,992 (<emu-xref href="#sec-number.min_safe_integer"></emu-xref> and <emu-xref href="#sec-number.max_safe_integer"></emu-xref>). A time value supports a slightly smaller range of -8,640,000,000,000,000 to 8,640,000,000,000,000 milliseconds. This yields a supported time value range of exactly -100,000,000 days to 100,000,000 days relative to midnight at the beginning of 01 January, 1970 UTC.</p>
-        <p>The exact moment of midnight at the beginning of 01 January, 1970 UTC is represented by the time value *+0*.</p>
+        <p>A Number can exactly represent all integers from -9,007,199,254,740,992 to 9,007,199,254,740,992 (<emu-xref href="#sec-number.min_safe_integer"></emu-xref> and <emu-xref href="#sec-number.max_safe_integer"></emu-xref>). A time value supports a slightly smaller range of -8,640,000,000,000,000 to 8,640,000,000,000,000 milliseconds. This yields a supported time value range of exactly -100,000,000 days to 100,000,000 days relative to midnight at the beginning of 1 January 1970 UTC.</p>
+        <p>The exact moment of midnight at the beginning of 1 January 1970 UTC is represented by the time value *+0*.</p>
         <emu-note>
           <p>The 400 year cycle of the proleptic Gregorian calendar contains 97 leap years. This yields an average of 365.2425 days per year, which is 31,556,952,000 milliseconds. Therefore, the maximum range a Number could represent exactly with millisecond precision is approximately -285,426 to 285,426 years relative to 1970. The smaller range supported by a time value as specified in this section is approximately -273,790 to 273,790 years relative to 1970.</p>
         </emu-note>
@@ -28164,7 +28164,7 @@
         </emu-eqn>
         <p>where</p>
         <emu-eqn id="eqn-DayWithinYear" aoid="DayWithinYear">DayWithinYear(_t_) = Day(_t_) - DayFromYear(YearFromTime(_t_))</emu-eqn>
-        <p>A month value of 0 specifies January; 1 specifies February; 2 specifies March; 3 specifies April; 4 specifies May; 5 specifies June; 6 specifies July; 7 specifies August; 8 specifies September; 9 specifies October; 10 specifies November; and 11 specifies December. Note that <emu-eqn>MonthFromTime(0) = 0</emu-eqn>, corresponding to Thursday, 01 January, 1970.</p>
+        <p>A month value of 0 specifies January; 1 specifies February; 2 specifies March; 3 specifies April; 4 specifies May; 5 specifies June; 6 specifies July; 7 specifies August; 8 specifies September; 9 specifies October; 10 specifies November; and 11 specifies December. Note that <emu-eqn>MonthFromTime(0) = 0</emu-eqn>, corresponding to Thursday, 1 January 1970.</p>
       </emu-clause>
 
       <emu-clause id="sec-date-number">
@@ -28190,7 +28190,7 @@
         <h1>Week Day</h1>
         <p>The weekday for a particular time value _t_ is defined as</p>
         <emu-eqn aoid="WeekDay">WeekDay(_t_) = (Day(_t_) + 4) modulo 7</emu-eqn>
-        <p>A weekday value of 0 specifies Sunday; 1 specifies Monday; 2 specifies Tuesday; 3 specifies Wednesday; 4 specifies Thursday; 5 specifies Friday; and 6 specifies Saturday. Note that <emu-eqn>WeekDay(0) = 4</emu-eqn>, corresponding to Thursday, 01 January, 1970.</p>
+        <p>A weekday value of 0 specifies Sunday; 1 specifies Monday; 2 specifies Tuesday; 3 specifies Wednesday; 4 specifies Thursday; 5 specifies Friday; and 6 specifies Saturday. Note that <emu-eqn>WeekDay(0) = 4</emu-eqn>, corresponding to Thursday, 1 January 1970.</p>
       </emu-clause>
 
       <emu-clause id="sec-local-time-zone-adjustment" aoid="LocalTZA">
@@ -28203,8 +28203,8 @@
         <p>If an implementation does not support a conversion described above or if political rules for time _t_ are not available within the implementation, the result must be 0.</p>
         <emu-note>
           <p>It is recommended that implementations use the time zone information of the IANA Time Zone Database <a href="https://www.iana.org/time-zones/">https://www.iana.org/time-zones/</a>.</p>
-          <p>1:30 AM on November 5, 2017 in America/New_York is repeated twice (fall backward), but it must be interpreted as 1:30 AM UTC-04 instead of 1:30 AM UTC-05. LocalTZA(TimeClip(MakeDate(MakeDay(2017, 10, 5), MakeTime(1, 30, 0, 0))), false) is <emu-eqn>-4 &times; msPerHour</emu-eqn>.</p>
-          <p>2:30 AM on March 12, 2017 in America/New_York does not exist, but it must be interpreted as 2:30 AM UTC-05 (equivalent to 3:30 AM UTC-04). LocalTZA(TimeClip(MakeDate(MakeDay(2017, 2, 12), MakeTime(2, 30, 0, 0))), false) is <emu-eqn>-5 &times; msPerHour</emu-eqn>.</p>
+          <p>1:30 AM on 5 November 2017 in America/New_York is repeated twice (fall backward), but it must be interpreted as 1:30 AM UTC-04 instead of 1:30 AM UTC-05. LocalTZA(TimeClip(MakeDate(MakeDay(2017, 10, 5), MakeTime(1, 30, 0, 0))), false) is <emu-eqn>-4 &times; msPerHour</emu-eqn>.</p>
+          <p>2:30 AM on 12 March 2017 in America/New_York does not exist, but it must be interpreted as 2:30 AM UTC-05 (equivalent to 3:30 AM UTC-04). LocalTZA(TimeClip(MakeDate(MakeDay(2017, 2, 12), MakeTime(2, 30, 0, 0))), false) is <emu-eqn>-5 &times; msPerHour</emu-eqn>.</p>
           <p>Local time zone offset values may be positive <i>or</i> negative.</p>
         </emu-note>
       </emu-clause>
@@ -28424,7 +28424,7 @@ THH:mm:ss.sss
 
         <emu-clause id="sec-expanded-years" oldids="sec-extended-years">
           <h1>Expanded Years</h1>
-          <p>Covering the full time value range of approximately 273,790 years forward or backward from 01 January, 1970 (<emu-xref href="#sec-time-values-and-time-range"></emu-xref>) requires representing years before 0 or after 9999. ISO 8601 permits expansion of the year representation, but only by mutual agreement of the partners in information interchange. In the simplified ECMAScript format, such an expanded year representation shall have 6 digits and is always prefixed with a + or - sign. The year 0 is considered positive and hence prefixed with a + sign. Strings matching the <emu-xref href="#sec-date-time-string-format">Date Time String Format</emu-xref> with expanded years representing instants in time outside the range of a time value are treated as unrecognizable by <emu-xref href="#sec-date.parse">`Date.parse`</emu-xref> and cause that function to return *NaN* without falling back to implementation-specific behaviour or heuristics.</p>
+          <p>Covering the full time value range of approximately 273,790 years forward or backward from 1 January 1970 (<emu-xref href="#sec-time-values-and-time-range"></emu-xref>) requires representing years before 0 or after 9999. ISO 8601 permits expansion of the year representation, but only by mutual agreement of the partners in information interchange. In the simplified ECMAScript format, such an expanded year representation shall have 6 digits and is always prefixed with a + or - sign. The year 0 is considered positive and hence prefixed with a + sign. Strings matching the <emu-xref href="#sec-date-time-string-format">Date Time String Format</emu-xref> with expanded years representing instants in time outside the range of a time value are treated as unrecognizable by <emu-xref href="#sec-date.parse">`Date.parse`</emu-xref> and cause that function to return *NaN* without falling back to implementation-specific behaviour or heuristics.</p>
           <emu-note>
             <p>Examples of date-time values with expanded years:</p>
             <figure>
@@ -42162,16 +42162,23 @@ THH:mm:ss.sss
             It is a Syntax Error if any source text matches this rule.
           </li>
         </ul>
+        <p>Additionally, the rules for the following productions are modified with the addition of the <ins>highlighted</ins> text:</p>
         <emu-grammar>NonemptyClassRanges :: ClassAtom `-` ClassAtom ClassRanges</emu-grammar>
         <ul>
           <li>
             It is a Syntax Error if IsCharacterClass of the first |ClassAtom| is *true* or IsCharacterClass of the second |ClassAtom| is *true* <ins>and this production has a <sub>[U]</sub> parameter</ins>.
+          </li>
+          <li>
+            It is a Syntax Error if IsCharacterClass of the first |ClassAtom| is *false* and IsCharacterClass of the second |ClassAtom| is *false* and the CharacterValue of the first |ClassAtom| is larger than the CharacterValue of the second |ClassAtom|.
           </li>
         </ul>
         <emu-grammar>NonemptyClassRangesNoDash :: ClassAtomNoDash `-` ClassAtom ClassRanges</emu-grammar>
         <ul>
           <li>
             It is a Syntax Error if IsCharacterClass of |ClassAtomNoDash| is *true* or IsCharacterClass of |ClassAtom| is *true* <ins>and this production has a <sub>[U]</sub> parameter</ins>.
+          </li>
+          <li>
+            It is a Syntax Error if IsCharacterClass of |ClassAtomNoDash| is *false* and IsCharacterClass of |ClassAtom| is *false* and the CharacterValue of |ClassAtomNoDash| is larger than the CharacterValue of |ClassAtom|.
           </li>
         </ul>
       </emu-annex>
@@ -42805,7 +42812,7 @@ THH:mm:ss.sss
 
     <emu-annex id="sec-labelled-function-declarations">
       <h1>Labelled Function Declarations</h1>
-      <p>Prior to ECMAScript 2015, the specification of |LabelledStatement| did not allow for the association of a statement label with a |FunctionDeclaration|. However, a labelled |FunctionDeclaration| was an allowable extension for non-strict code and most browser-hosted ECMAScript implementations supported that extension. In ECMAScript 2015, the grammar productions for |LabelledStatement| permits use of |FunctionDeclaration| as a |LabelledItem| but <emu-xref href="#sec-labelled-statements-static-semantics-early-errors"></emu-xref> includes an Early Error rule that produces a Syntax Error if that occurs. For web browser compatibility, that rule is modified with the addition of the <ins>highlighted</ins> text:</p>
+      <p>Prior to ECMAScript 2015, the specification of |LabelledStatement| did not allow for the association of a statement label with a |FunctionDeclaration|. However, a labelled |FunctionDeclaration| was an allowable extension for non-strict code and most browser-hosted ECMAScript implementations supported that extension. In ECMAScript 2015 and later, the grammar production for |LabelledStatement| permits use of |FunctionDeclaration| as a |LabelledItem| but <emu-xref href="#sec-labelled-statements-static-semantics-early-errors"></emu-xref> includes an Early Error rule that produces a Syntax Error if that occurs. That rule is modified with the addition of the <ins>highlighted</ins> text:</p>
       <emu-grammar>LabelledItem : FunctionDeclaration</emu-grammar>
       <ul>
         <li>
@@ -42970,21 +42977,27 @@ THH:mm:ss.sss
       </emu-annex>
       <emu-annex id="sec-block-duplicates-allowed-static-semantics">
         <h1>Changes to Block Static Semantics: Early Errors</h1>
-        <p>For web browser compatibility, that rule is modified with the addition of the <ins>highlighted</ins> text:</p>
+        <p>The rules for the following production in <emu-xref href="#sec-block-static-semantics-early-errors"></emu-xref> are modified with the addition of the <ins>highlighted</ins> text:</p>
         <emu-grammar>Block : `{` StatementList `}`</emu-grammar>
         <ul>
           <li>
-            It is a Syntax Error if the LexicallyDeclaredNames of |StatementList| contains any duplicate entries, <ins>unless the source code matching this production is not strict mode code and the duplicate entries are only bound by FunctionDeclarations.</ins>
+            It is a Syntax Error if the LexicallyDeclaredNames of |StatementList| contains any duplicate entries<ins>, unless the source code matching this production is not strict mode code and the duplicate entries are only bound by FunctionDeclarations</ins>.
+          </li>
+          <li>
+            It is a Syntax Error if any element of the LexicallyDeclaredNames of |StatementList| also occurs in the VarDeclaredNames of |StatementList|.
           </li>
         </ul>
       </emu-annex>
       <emu-annex id="sec-switch-duplicates-allowed-static-semantics">
         <h1>Changes to `switch` Statement Static Semantics: Early Errors</h1>
-        <p>For web browser compatibility, that rule is modified with the addition of the <ins>highlighted</ins> text:</p>
+        <p>The rules for the following production in <emu-xref href="#sec-switch-statement-static-semantics-early-errors"></emu-xref> are modified with the addition of the <ins>highlighted</ins> text:</p>
         <emu-grammar>SwitchStatement : `switch` `(` Expression `)` CaseBlock</emu-grammar>
         <ul>
           <li>
-            It is a Syntax Error if the LexicallyDeclaredNames of |CaseBlock| contains any duplicate entries, <ins>unless the source code matching this production is not strict mode code and the duplicate entries are only bound by FunctionDeclarations.</ins>
+            It is a Syntax Error if the LexicallyDeclaredNames of |CaseBlock| contains any duplicate entries<ins>, unless the source code matching this production is not strict mode code and the duplicate entries are only bound by FunctionDeclarations</ins>.
+          </li>
+          <li>
+            It is a Syntax Error if any element of the LexicallyDeclaredNames of |CaseBlock| also occurs in the VarDeclaredNames of |CaseBlock|.
           </li>
         </ul>
       </emu-annex>
