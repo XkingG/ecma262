@@ -4098,7 +4098,7 @@
         1. Return _input_.
       </emu-alg>
       <emu-note>
-        <p>When ToPrimitive is called with no hint, then it generally behaves as if the hint was ~number~. However, objects may over-ride this behaviour by defining a @@toPrimitive method. Of the objects defined in this specification only Date objects (see <emu-xref href="#sec-date.prototype-@@toprimitive"></emu-xref>) and Symbol objects (see <emu-xref href="#sec-symbol.prototype-@@toprimitive"></emu-xref>) over-ride the default ToPrimitive behaviour. Date objects treat no hint as if the hint was ~string~.</p>
+        <p>When ToPrimitive is called with no hint, then it generally behaves as if the hint were ~number~. However, objects may over-ride this behaviour by defining a @@toPrimitive method. Of the objects defined in this specification only Date objects (see <emu-xref href="#sec-date.prototype-@@toprimitive"></emu-xref>) and Symbol objects (see <emu-xref href="#sec-symbol.prototype-@@toprimitive"></emu-xref>) over-ride the default ToPrimitive behaviour. Date objects treat no hint as if the hint were ~string~.</p>
       </emu-note>
 
       <emu-clause id="sec-ordinarytoprimitive" aoid="OrdinaryToPrimitive">
@@ -15310,7 +15310,7 @@
         1. Return ? _operation_(_lnum_, _rnum_).
       </emu-alg>
       <emu-note>
-        <p>No hint is provided in the calls to ToPrimitive in steps <emu-xref href="#step-binary-op-toprimitive-lval"></emu-xref> and <emu-xref href="#step-binary-op-toprimitive-rval"></emu-xref>. All standard objects except Date objects handle the absence of a hint as if ~number~ was given; Date objects handle the absence of a hint as if ~string~ was given. Exotic objects may handle the absence of a hint in some other manner.</p>
+        <p>No hint is provided in the calls to ToPrimitive in steps <emu-xref href="#step-binary-op-toprimitive-lval"></emu-xref> and <emu-xref href="#step-binary-op-toprimitive-rval"></emu-xref>. All standard objects except Date objects handle the absence of a hint as if ~number~ were given; Date objects handle the absence of a hint as if ~string~ were given. Exotic objects may handle the absence of a hint in some other manner.</p>
       </emu-note>
       <emu-note>
         <p>Step <emu-xref href="#step-binary-op-string-check"></emu-xref> differs from step <emu-xref href="#step-arc-string-check"></emu-xref> of the Abstract Relational Comparison algorithm, by using the logical-or operation instead of the logical-and operation.</p>
